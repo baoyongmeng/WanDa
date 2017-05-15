@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zhuoshi.resoures.Dome.dao.RoleDao">
+
+
+	<!-- 查询全部 -->
+	<select id="QueryAll" resultType="zhuoshi.resoures.Dome.bean.Role">
+		SELECT * FROM role
+	</select>
+
+	<!-- 按id查询 -->
+	<select id="QueryById" parameterType="int"
+		resultType="zhuoshi.resoures.Dome.bean.Role">
+		SELECT * FROM role WHERE id = #{id}
+	</select>
+
+</mapper>
