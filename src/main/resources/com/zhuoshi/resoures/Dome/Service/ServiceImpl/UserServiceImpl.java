@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
 		return roleDao.QueryById(user_rid).getRoleName();
 	}
 
+	public User QueryByAccount(String UserAccount) {
+		// TODO Auto-generated method stub
+		return userDao.QueryByAccount(UserAccount);
+	}
+
 }

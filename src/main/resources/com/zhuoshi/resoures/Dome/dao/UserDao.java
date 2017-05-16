@@ -24,6 +24,9 @@ public interface UserDao {
 	//按照id删除
 	public int DeleteUser(int id);
 	
+	//按用户名查找
+	public User QueryByAccount(String UserAccount);
+	
 	//修改user
 	public int UpdateUser(User user);
 }

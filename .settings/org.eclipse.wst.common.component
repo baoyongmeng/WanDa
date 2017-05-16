@@ -6,6 +6,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources/com"/>
         <property name="java-output-path" value="/WanDa/target/classes"/>
-        <property name="context-root" value="TestMaven"/>
+        <property name="context-root" value="WanDa"/>
     </wb-module>
 </project-modules>

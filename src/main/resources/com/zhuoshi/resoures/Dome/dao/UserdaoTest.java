@@ -16,7 +16,7 @@ import zhuoshi.resoures.Dome.bean.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:com/zhuoshi/resoures/spring/spring-dao.xml")
-public class daoTest {
+public class UserdaoTest {
 
 	/**
 	 * org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.zhuoshi.Test.dao.Studao.SelectAll
@@ -24,7 +24,7 @@ public class daoTest {
 	
 	@Resource
 	private UserDao userDao;
-	@Test
+
 	/*public void testSelectAll() {
 		List<User>users = userDao.QueryAll();
 		for (User user : users) {
@@ -49,18 +49,10 @@ public class daoTest {
 		}
 		
 	}*/
-public void testSelectById() {
-	
-		/*if(userDao.DeleteUser(3)>1){
-			System.err.println("shancanashdasjk klsjdklasjdl k****************");
-		}*/
-		User user = new User();
-		user.setId(1);
-		user.setUserAccount("admin");
+	@Test
+	public void testSelectById() {
 		
-		int i =userDao.UpdateUser(user);
-		if (i>0) {
-			System.err.println("更新成功！！！！！！！！！！");
-		}
+		
+		System.err.println(userDao.QueryByAccount("admin"));
 	}
 }

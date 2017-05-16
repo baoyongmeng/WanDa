@@ -17,6 +17,8 @@ public interface UserService {
 	//查询id
 	public User QueryById(int id);
 	
+	public User QueryByAccount(String UserAccount);
+	
 	//查询全部
 	public List<User> QueryAll();
 	

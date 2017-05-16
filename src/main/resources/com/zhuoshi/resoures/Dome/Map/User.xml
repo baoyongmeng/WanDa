@@ -16,6 +16,11 @@
 		resultType="zhuoshi.resoures.Dome.bean.User">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
+	
+	<select id="QueryByAccount" parameterType="String"
+		resultType="zhuoshi.resoures.Dome.bean.User">
+		SELECT * FROM user WHERE UserAccount = #{UserAccount}
+	</select>
 
 	<!-- <select id="SelectOnes" parameterType="com.zhuoshi.Test.bean.User" 
 		resultMap="user"> SELECT * FROM user <where> <if test="name !=null and name 

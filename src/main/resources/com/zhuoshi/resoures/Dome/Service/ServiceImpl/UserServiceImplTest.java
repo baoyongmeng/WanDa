@@ -18,13 +18,14 @@ import zhuoshi.resoures.Dome.dao.UserDao;
  *@author BaoYongMeng E-mail: 951793431@qq.com
 * @date 创建时间：2017年5月15日 下午4:31:03 
 * @version 1.0 
+* userservic 测试类
 */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:com/zhuoshi/resoures/spring/spring-dao.xml",
 						"classpath:com/zhuoshi/resoures/spring/spring-service.xml",
 						"classpath:com/zhuoshi/resoures/spring/spring-Component.xml"})
 
-@Service
+
 public class UserServiceImplTest {
 
 	@Autowired
@@ -89,4 +90,9 @@ public class UserServiceImplTest {
 		
 	}
 
+	@Test
+	public void testQueryByAccount() {
+		System.err.println(userService.QueryByAccount("admin"));
+		
+	}
 }

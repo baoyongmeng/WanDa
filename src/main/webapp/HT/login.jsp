@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" isELIgnored="false"
+    pageEncoding="utf-8"%>
+<% String path = request.getContextPath(); %>
 <!doctype html>
 <html>
 
@@ -5,7 +8,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Amaze UI Admin index Examples</title>
-  <meta name="description" content="这是一个 index 页面">
+  <meta name="description" content="è¿æ¯ä¸ä¸ª index é¡µé¢">
   <meta name="keywords" content="index">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="renderer" content="webkit">
@@ -33,15 +36,15 @@
 			<i>Log In </i> or <span> Sign Up</span>
 		</div>
 		<div class="am-u-sm-10 login-am-center">
-			<form class="am-form">
+			<form class="am-form" action="<%=path%>/User/Login" method="post">
 				<fieldset>
 					<div class="am-form-group">
-						<input type="email" class="" id="doc-ipt-email-1" placeholder="输入电子邮件">
+						<input type="text" class="" id="doc-ipt-email-1" name="UserAccount" placeholder="请输入账户名">
 					</div>
 					<div class="am-form-group">
-						<input type="password" class="" id="doc-ipt-pwd-1" placeholder="设置个密码吧">
+						<input type="password" class="" id="doc-ipt-pwd-1" name="UserPassword" placeholder="请输入账户密码">
 					</div>
-					<p><button type="submit" class="am-btn am-btn-default">登录</button></p>
+					<p><button type="submit" class="am-btn am-btn-default">ç»å½</button></p>
 				</fieldset>
 			</form>
 		</div>
