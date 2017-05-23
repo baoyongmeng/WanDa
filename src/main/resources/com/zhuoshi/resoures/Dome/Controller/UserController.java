@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.annotations.Param;
-import org.eclipse.jdt.internal.compiler.env.IGenericField;
 import org.junit.FixMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,6 +89,12 @@ public class UserController {
 		model.addAttribute("list", users);
 		return "AdminUser";
 	}
+	/**
+	 * 删除用户
+	 * @param Id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "DeleteUser")
 	public String DeleteUser(@RequestParam(value="Id")Integer Id,Model model) {
 		
@@ -109,5 +114,18 @@ public class UserController {
 		}
 		model.addAttribute("fla", fla);
 		return ReturnURL;
+	}
+	/**
+	 * 查询单个（按照id查询）
+	 * @param Id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "QueryById")
+	public String QueryById(@RequestParam(value="Id")Integer Id,Model model) {
+		
+		User user = userService.QueryById(Id);
+		model.addAttribute("user", user);
+		return "EidUser";
 	}
 }
