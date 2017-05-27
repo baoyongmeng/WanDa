@@ -32,4 +32,10 @@ public interface UserDao {
 	
 	//修改user
 	public int UpdateUser(User user);
+	
+	//分页查询      spacing 起点的位置
+	public List<User> LimitQueryAll(int spacing);
+	
+	//查询共计多少数据
+	public int QueryAllCount();
 }

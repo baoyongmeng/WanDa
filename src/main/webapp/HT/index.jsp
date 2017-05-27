@@ -238,7 +238,7 @@
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu" style="display: block;">
-							<li><a href="<%=path%>/User/QueryAll"> <i
+							<li><a href="<%=path%>/User/QueryAll?page=1"> <i
 									class="am-icon-angle-right"></i> <span>用户管理</span> <i
 									class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
 							</a> </li>

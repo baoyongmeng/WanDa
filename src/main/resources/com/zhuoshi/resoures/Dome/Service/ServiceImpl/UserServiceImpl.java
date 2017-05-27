@@ -67,4 +67,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.QueryByAccount(UserAccount);
 	}
 
+	public List<User> LimiQueryAll(int spacing) {
+		// TODO Auto-generated method stub
+		return userDao.LimitQueryAll(spacing);
+	}
+
+	public int QueryAllCount() {
+		// TODO Auto-generated method stub
+		return userDao.QueryAllCount();
+	}
+
 }

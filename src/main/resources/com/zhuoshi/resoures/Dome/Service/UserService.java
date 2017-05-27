@@ -33,4 +33,10 @@ public interface UserService {
 	
 	//根据用户的rid查询用户的身份权限
 	public String QueryPosition(int user_rid);
+
+	//分页查询
+	public List<User> LimiQueryAll(int spacing);
+	
+	//查询全部的总数
+	public int QueryAllCount(); 	
 }

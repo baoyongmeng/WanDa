@@ -71,36 +71,65 @@ public class UserController {
 		// 登录成功或者失败后的返回地址
 		String LoginURL = "";
 		// 按id查询用户
-		user = userService.QueryByAccount(User_Account);
-		// 判断用户名是否有效
-		if (user.getUserAccount() != null && user.getUserAccount() != "") {
-			// 判断登录
-			if (user.getUserAccount().equals(User_Account) && user.getUserPassword().equals(User_Password)) {
-				// 登录成功 定向首页 并将user信息携带到首页
-				// System.err.println(user.getUserName()+"<-------------------------------超级华丽输出线-------------------------------->");
-				model.addAttribute("user", user);
-				LoginURL = "forward:Index";
+		if (User_Account != null && User_Account != "") {
+			user = userService.QueryByAccount(User_Account);
+
+			// 判断用户名是否有效
+			if (user.getUserAccount() != null && user.getUserAccount() != "") {
+				// 判断登录
+				if (user.getUserAccount().equals(User_Account) && user.getUserPassword().equals(User_Password)) {
+					// 登录成功 定向首页 并将user信息携带到首页
+					// System.err.println(user.getUserName()+"<-------------------------------超级华丽输出线-------------------------------->");
+					model.addAttribute("user", user);
+					LoginURL = "forward:Index";
+				} else {
+					// 登录失败，返回登录页面
+					LoginURL = "login";
+				}
 			} else {
 				// 登录失败，返回登录页面
 				LoginURL = "login";
 			}
+		} else {
+			// 登录失败，返回登录页面
+			LoginURL = "login";
 		}
 
 		return LoginURL;
 	}
 
 	/**
-	 * 查询全部 并且向前台返回一个userList
-	 * 
+	 * 查询全部 向前台返回一个分页的 userUtils
 	 * @param model
+	 * @param page
 	 * @return
 	 */
 	@RequestMapping(value = "QueryAll")
-	public String QueryAll(Model model) {
+	public String QueryAll(Model model, @RequestParam(value = "page") Integer page) {
 
+		// 查询总共有多少数据
+		int total = userService.QueryAllCount();
+		// 第几页
+		int totals = total / 10 + 1;
+
+		if (page < 0 || page > totals) {
+			// 跳异常
+			System.err.println("异常了！！！！！");
+			System.exit(0);
+		}
+
+		System.err.println(total + "------------------------------------------");
+
+		model.addAttribute("totals", totals);
+
+		// 当前页数
+
+		int pagecount = page - 1;
+
+		model.addAttribute("page", page);
 		List<UserUtil> userUtils = new ArrayList<UserUtil>();
 
-		List<User> users = userService.QueryAll();
+		List<User> users = userService.LimiQueryAll(pagecount * 10);
 		// 这里引入一个工具类，为了将用户的身份名称显示出来
 		// 这个工具了与User类相同，不同的是roleid->rolename
 		for (User user1 : users) {
@@ -136,7 +165,7 @@ public class UserController {
 				Id + "********************************************************************************************");
 
 		if (userService.DeleteUser(Id) > 0) {
-			ReturnURL = "redirect:QueryAll";
+			ReturnURL = "redirect:QueryAll?page=1";
 			fla = "1";
 		} else {
 			fla = "0";
@@ -206,10 +235,12 @@ public class UserController {
 				userService + "<-----------------UPDATE--------------超级华丽输出线-------------------------------->");
 		System.err.println(user);
 		if (userService.UpdateUser(user) > 0) {
-			ReturnURL = "redirect:QueryAll";
+			ReturnURL = "redirect:QueryAll?page=1";
 		} else {
 			// 这里应该跳转一个错误页面
 			System.err.println("修改失败！！！");
+			ReturnURL = "forward:QueryById";
+			
 		}
 		return ReturnURL;
 	}
@@ -243,7 +274,7 @@ public class UserController {
 		String userName = request.getParameter("UserName");
 		String userMobile = request.getParameter("UserMobile");
 		String roleId = request.getParameter("RoleId");
-
+		
 		user.setUserAccount(userAccount);
 		user.setUserPassword(userPassword);
 		user.setUserName(userName);
@@ -251,16 +282,20 @@ public class UserController {
 		// user.setCreateTime(createTime);
 		user.setRoleId(Integer.parseInt(roleId));
 		user.setCreateTime(dateTime.getTime());
+
 		if (userAccount != null && userAccount != "" && userPassword != null && userPassword != "" && userName != null
 				&& userName != "" && userMobile != null && userMobile != "") {
+
+			
 			if (userService.AddUser(user) > 0) {
-				ReturnURL = "redirect:QueryAll";
+				System.err.println("<-----------------UPDATE--------------超级华丽输出线-------------------------------->");
+				ReturnURL = "redirect:QueryAll?page=1";
 			} else {
 				System.err.println("添加失败！！！");
 				ReturnURL = "AddUser";
 			}
-			
-		}ReturnURL = "AddUser";
+
+		}
 
 		return ReturnURL;
 	}

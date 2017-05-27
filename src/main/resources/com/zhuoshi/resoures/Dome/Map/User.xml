@@ -11,10 +11,19 @@
 		SELECT * FROM user
 	</select>
 
+	<!-- 查询全部并分页 -->
+	<select id="LimitQueryAll" parameterType="int" resultType="zhuoshi.resoures.Dome.bean.User">
+		SELECT * FROM user LIMIT #{spacing},10;
+	</select>
+	
+	<select id="QueryAllCount" resultType="int">
+		SELECT count(id) FROM user ;
+	</select>
+
+
 	<!-- 按id查询 -->
-	<select id="QueryById" parameterType="int"
-		resultType="zhuoshi.resoures.Dome.bean.User">
-		SELECT * FROM user WHERE id = #{id}
+	<select id="QueryById" resultType="zhuoshi.resoures.Dome.bean.User">
+		SELECT * FROM user WHERE id = #{id};
 	</select>
 	
 	<select id="QueryByAccount" parameterType="String"
@@ -35,9 +44,9 @@
 	<insert id="AddUser" parameterType="zhuoshi.resoures.Dome.bean.User"
 		useGeneratedKeys="false">
 		INSERT INTO user
-		( id,UserAccount,UserPassword,UserName,UserMobile,RoleId,CreateTime)
+		(UserAccount,UserPassword,UserName,UserMobile,RoleId,CreateTime)
 		VALUES(
-		#{id},#{UserAccount,jdbcType=VARCHAR},#{UserPassword,jdbcType=VARCHAR},#{UserName,jdbcType=VARCHAR},#{UserMobile,jdbcType=VARCHAR},#{RoleId},#{CreateTime})
+		#{UserAccount,jdbcType=VARCHAR},#{UserPassword,jdbcType=VARCHAR},#{UserName,jdbcType=VARCHAR},#{UserMobile,jdbcType=VARCHAR},#{RoleId},#{CreateTime})
 	</insert>
 
 	<update id="UpdateUser" parameterType="zhuoshi.resoures.Dome.bean.User">

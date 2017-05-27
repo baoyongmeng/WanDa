@@ -24,7 +24,7 @@ public class DateTime {
 		int ff=date.getMinutes();
 		int ss = date.getSeconds();
 		time = yy+"/"+mm+"/"+dd+" "+hh+"/"+ff+"/"+ss;
-		System.err.println(time);
+		//System.err.println(time);
 		//2000/11/09 18/15/42
 		return time;
 	}
