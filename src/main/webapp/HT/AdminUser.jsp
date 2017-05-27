@@ -304,22 +304,10 @@ function Really(id)
 						<div class="am-u-sm-12 am-u-md-6">
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
-									<button type="button"
+									<a type="button" href="<%=path%>/User/AddUserBefor"
 										class="am-btn am-btn-default am-btn-success">
-										<span class="am-icon-plus"></span> 新增
-									</button>
-									<button type="button"
-										class="am-btn am-btn-default am-btn-secondary">
-										<span class="am-icon-save"></span> 保存
-									</button>
-									<button type="button"
-										class="am-btn am-btn-default am-btn-warning">
-										<span class="am-icon-archive"></span> 审核
-									</button>
-									<button type="button"
-										class="am-btn am-btn-default am-btn-danger">
-										<span class="am-icon-trash-o"></span> 删除
-									</button>
+										<span class="am-icon-plus"  ></span> 新增
+									</a>
 								</div>
 							</div>
 						</div>
@@ -375,7 +363,7 @@ function Really(id)
 												<td>${user.userPassword}</td>
 												<td class="am-hide-sm-only">${user.userName}</td>
 												<td class="am-hide-sm-only">${user.userMobile}</td>
-												<td class="am-hide-sm-only">${user.roleId}</td>
+												<td class="am-hide-sm-only">${user.roleName}</td>
 												<td class="am-hide-sm-only">${user.createTime}</td>
 
 												<td>

@@ -12,6 +12,9 @@ import zhuoshi.resoures.Dome.bean.User;
 */
 public interface UserDao {
 	
+	//按照姓名查询用户
+	public User QueryByUserAccount();
+	
 	//查询全部的用户
 	public List<User> QueryAll();
 

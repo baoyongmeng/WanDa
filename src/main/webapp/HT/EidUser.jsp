@@ -17,34 +17,27 @@
 <body>
 
 
-	<form
-		action="./Modal Box Contact Form_files/Modal Box Contact Form.html"
-		class="contact">
+	<form action="<%=path%>/User/UpdateUser" class="contact" method="post">
 		<fieldset class="contact-inner">
 			<p class="contact-input">
-			
 				ID<input type="text" name="Id" placeholder="${user.id}" value="${user.id}" autofocus="">
 				账户名<input type="text" name="UserAccount" placeholder="${user.userAccount}" value="${user.userAccount}" autofocus="">
 				账户密码<input type="text" name="UserPassword" placeholder="${user.userPassword}" value="${user.userPassword}" autofocus="">
 				用户名<input type="text" name="UserName" placeholder="${user.userName}" value="${user.userName}" autofocus="">
 				用户电话<input type="text" name="UserMobile" placeholder="${user.userMobile}" value="${user.userMobile}" autofocus="">
-				用户权限<input type="text" name="RoleId" placeholder="${user.roleId}" value="${user.roleId}" autofocus="">
-				用户创建时间<input type="text" name="RoleId" placeholder="${user.createTime}" value="${user.createTime}" autofocus="">
+				用户创建时间<input type="text" name="CreateTime" placeholder="${user.createTime}" value="${user.createTime}" autofocus="">
 			</p>
 
 			<p class="contact-input">
 				<label for="select" class="select"> <select name="RoleId"
 					id="select">
-						<option value="" selected="">Choose Subject…</option>
-						<option value="1">I have a suggestion</option>
-						<option value="1">I found a bug</option>
-						<option value="1">Other</option>
+						<c:forEach items="${roleList}" var="role">
+
+							<option value="${role.id}">${role.roleName}</option>
+
+						</c:forEach>
 				</select>
 				</label>
-			</p>
-
-			<p class="contact-input">
-				<textarea name="message" placeholder="Your Message…"></textarea>
 			</p>
 
 			<p class="contact-submit">

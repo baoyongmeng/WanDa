@@ -1,4 +1,4 @@
-package zhuoshi.resoures.Dome.bean;
+package zhuoshi.resoures.Dome.Util;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 * User类 用于用户登录
 */
 @Component
-public class User {
+public class UserUtil {
 	
 	//Id
 	private int Id;
@@ -26,9 +26,8 @@ public class User {
 	private String CreateTime;
 	//用户电话
 	private String UserMobile;
-	//权限id
-	private int RoleId;
-	
+	//权限名
+	private String  RoleName;
 	public int getId() {
 		return Id;
 	}
@@ -59,24 +58,26 @@ public class User {
 	public void setUserMobile(String userMobile) {
 		UserMobile = userMobile;
 	}
-	public int getRoleId() {
-		return RoleId;
-	}
-	public void setRoleId(int roleId) {
-		RoleId = roleId;
-	}
+	
 	public String getCreateTime() {
 		return CreateTime;
 	}
 	public void setCreateTime(String createTime) {
 		CreateTime = createTime;
 	}
+	public String getRoleName() {
+		return RoleName;
+	}
+	public void setRoleName(String roleName) {
+		RoleName = roleName;
+	}
 	@Override
 	public String toString() {
-		return "User [Id=" + Id + ", UserAccount=" + UserAccount + ", UserPassword=" + UserPassword + ", UserName="
-				+ UserName + ", CreateTime=" + CreateTime + ", UserMobile=" + UserMobile + ", RoleId=" + RoleId
+		return "UserUtil [Id=" + Id + ", UserAccount=" + UserAccount + ", UserPassword=" + UserPassword + ", UserName="
+				+ UserName + ", CreateTime=" + CreateTime + ", UserMobile=" + UserMobile + ", RoleName=" + RoleName
 				+ "]";
 	}
+	
 	
 	
 }

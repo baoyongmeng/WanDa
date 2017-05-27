@@ -35,9 +35,9 @@
 	<insert id="AddUser" parameterType="zhuoshi.resoures.Dome.bean.User"
 		useGeneratedKeys="false">
 		INSERT INTO user
-		( id,UserAccount,UserPassword,UserName,UserMobile,RoleId)
+		( id,UserAccount,UserPassword,UserName,UserMobile,RoleId,CreateTime)
 		VALUES(
-		#{id},#{UserAccount,jdbcType=VARCHAR},#{UserPassword,jdbcType=VARCHAR},#{UserName,jdbcType=VARCHAR},#{UserMobile,jdbcType=VARCHAR},#{RoleId})
+		#{id},#{UserAccount,jdbcType=VARCHAR},#{UserPassword,jdbcType=VARCHAR},#{UserName,jdbcType=VARCHAR},#{UserMobile,jdbcType=VARCHAR},#{RoleId},#{CreateTime})
 	</insert>
 
 	<update id="UpdateUser" parameterType="zhuoshi.resoures.Dome.bean.User">
@@ -55,6 +55,9 @@
 		</if>
 		<if test="UserMobile!=null and UserMobile!=''">
 			UserMobile = #{UserMobile,jdbcType=VARCHAR},
+		</if>
+		<if test="CreateTime!=null and CreateTime!=''">
+			CreateTime = #{CreateTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="RoleId!=null and RoleId!=''">
 			RoleId = #{RoleId,jdbcType=VARCHAR}

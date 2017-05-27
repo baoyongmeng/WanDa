@@ -14,7 +14,7 @@
 	<!--扫描bean包下所有使用注解的类型
 	<context:component-scan base-package="zhuoshi.resoures.Dome.Util;zhuoshi.resoures.Dome.bean" /> -->
 	
-	<context:component-scan base-package="zhuoshi.resoures.Dome.bean" />
+	<context:component-scan base-package="zhuoshi.resoures.Dome.bean;zhuoshi.resoures.Dome.Util" />
 
 	
 

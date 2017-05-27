@@ -35,7 +35,16 @@ public class UserServiceImpl implements UserService {
 
 	public int AddUser(User user) {
 		// TODO Auto-generated method stub
-		return userDao.AddUser(user);
+		
+		int column = 0;
+		
+		//确保用户名不会重复
+		if (userDao.QueryByAccount(user.getUserAccount())==null) {
+			column = userDao.AddUser(user);
+		}
+		
+		
+		return column;
 	}
 
 	public int DeleteUser(int id) {
