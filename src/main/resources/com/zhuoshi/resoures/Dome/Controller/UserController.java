@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import zhuoshi.resoures.Dome.Service.RoleService;
 import zhuoshi.resoures.Dome.Service.UserService;
 import zhuoshi.resoures.Dome.Util.DateTime;
+import zhuoshi.resoures.Dome.Util.EncodingTool;
 import zhuoshi.resoures.Dome.Util.UserUtil;
+import zhuoshi.resoures.Dome.Util.Utils;
 import zhuoshi.resoures.Dome.bean.Role;
 import zhuoshi.resoures.Dome.bean.User;
 
@@ -43,6 +45,10 @@ public class UserController {
 	private UserUtil userUtil;
 	@Autowired
 	private DateTime dateTime;
+	@Autowired
+	private Utils utils;
+	@Autowired
+	private EncodingTool encoding;
 
 	/**
 	 * 这里是用来返回首页的 为了这个系统的安全性，以及健壮性，所以不能在地址栏显示上一个页面的地址什么的，有上一个页面的返回值来重定向或者转发
@@ -111,15 +117,7 @@ public class UserController {
 		int total = userService.QueryAllCount();
 		// 第几页
 		int totals = total / 10 + 1;
-
-		if (page < 0 || page > totals) {
-			// 跳异常
-			System.err.println("异常了！！！！！");
-			System.exit(0);
-		}
-
-		System.err.println(total + "------------------------------------------");
-
+//		System.err.println(total + "------------------------------------------");
 		model.addAttribute("totals", totals);
 
 		// 当前页数
@@ -299,7 +297,86 @@ public class UserController {
 
 		return ReturnURL;
 	}
+	/**
+	 * 按照用户的权限名查询
+	 * @param roleId :权限的id
+	 * @param model
+	 * @return
+	 */
 
+	@RequestMapping("SelectRole")
+	public String SelectRole(@RequestParam(value = "roleId") Integer roleId, Model model) {
+		
+		user = new User();
+		user.setRoleId(roleId);
+		
+		
+		List<User> users = userService.ManyConditionsQuery(user);
+		List<UserUtil> userUtils = new ArrayList<UserUtil>();
+		for (User user1 : users) {
+			userUtil = new UserUtil();
+			userUtil.setId(user1.getId());
+			userUtil.setUserAccount(user1.getUserAccount());
+			userUtil.setUserPassword(user1.getUserPassword());
+			userUtil.setUserName(user1.getUserName());
+			userUtil.setUserMobile(user1.getUserMobile());
+			userUtil.setCreateTime(user1.getCreateTime());
+			userUtil.setRoleName(roleService.QueryById(user1.getRoleId()).getRoleName());
+			userUtils.add(userUtil);
+		}
+		model.addAttribute("list", userUtils);
+		model.addAttribute("page", 1);
+		model.addAttribute("total", 1);		
+		
+		return "AdminUser";
+	}
+	/**
+	 * 类似多条件模糊查询，但是略微有点不同   （前台不管输入的值是什么查询字段，到后台去调用工具类，自己判断前台输入的值是什么字段）
+	 * @param str ：前台传进来的字符串 需要判断  它是什么字段
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("QueryByAConditions")
+public String QueryByAConditions(@RequestParam(value = "str") String str, Model model) {
+		str = encoding.encodeStr(str);
+		
+		System.err.println(str+"<-----------------UPDATE--------------超级华丽输出线-------------------------------->");
+		
+		
+		user = new User();//初始化user的值，因为是spring初始化的bean 所以为了不被其他处使用的bean影响这里的值，需要清空这个user里面的值
+		//IFChar（str 这里传进的字符串） 这个方法用来判断第一个字符是否字母
+		if (utils.IFChar(str)) {
+			
+			user.setUserAccount(str);
+			//判断第一个字符是否是数字
+		}else if (utils.IFCount(str)) {
+			user.setUserMobile(str);
+			//其余为汉字或其他，即为用户名
+		}else {
+			user.setUserName(str);
+		}
+		//调用模糊查询的方法，返回值有可能为多条数据，所以为list
+		List<User> users = userService.ManyConditionsQuery(user);
+		List<UserUtil> userUtils = new ArrayList<UserUtil>();
+		for (User user1 : users) {
+			userUtil = new UserUtil();
+			userUtil.setId(user1.getId());
+			userUtil.setUserAccount(user1.getUserAccount());
+			userUtil.setUserPassword(user1.getUserPassword());
+			userUtil.setUserName(user1.getUserName());
+			userUtil.setUserMobile(user1.getUserMobile());
+			userUtil.setCreateTime(user1.getCreateTime());
+			userUtil.setRoleName(roleService.QueryById(user1.getRoleId()).getRoleName());
+			userUtils.add(userUtil);
+		}
+		model.addAttribute("list", userUtils);
+		model.addAttribute("page", 1);
+		model.addAttribute("total", 1);		
+		
+		
+		return "AdminUser";
+	}
+	
 	@RequestMapping("AddUserBefor")
 	private String AddUserBefor(Model model) {
 		List<Role> roles = roleService.QueryAll();

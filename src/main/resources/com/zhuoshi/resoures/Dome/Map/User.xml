@@ -76,6 +76,32 @@
 		id = #{id,jdbcType=INTEGER}
 	</update>
 
+<!-- 多条件查询 -->
+
+ <select id="ManyConditionsQuery" parameterType="zhuoshi.resoures.Dome.bean.User" resultType="zhuoshi.resoures.Dome.bean.User">
+	SELECT * FROM user
+	<where>
+		<if test="Id !=null and Id !=''">
+			Id = #{Id}
+		</if>
+		<if test="UserAccount!=null and UserAccount!=''">
+		 	and	UserAccount = #{UserAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="UserName!=null and UserName!=''">
+			and	UserName = #{UserName,jdbcType=VARCHAR}
+		</if>
+		<if test="UserMobile!=null and UserMobile!=''">
+			and	UserMobile = #{UserMobile,jdbcType=VARCHAR}
+		</if>
+		<if test="RoleId!=null and RoleId!=''">
+			and	RoleId = #{RoleId,jdbcType=VARCHAR}
+		</if>
+    </where>
+    
+  </select>
+
+
+
 
 
 	<!-- <select id="version" parameterType="long" resultType="int"> SELECT 

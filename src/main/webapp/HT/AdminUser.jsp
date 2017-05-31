@@ -44,6 +44,30 @@ function Really(id)
       alert("您已取消删除操作");
     }
 }
+function judgePage(page,total) {
+	
+	//alert(page);
+	//alert(total);
+	
+	if(page <=0 || page > total){
+		alert("没有页码啦！别按啦！")
+	}
+	else{
+		location.href="<%=path%>/User/QueryAll?page="+page;
+	}
+}
+function Select() {
+	//alert("!!!!!!!!")
+	var roleURL = document.getElementById("sel").value;
+	//alert(roleURL);
+	location.href=roleURL;
+}
+function SouSuo() {
+	//alert("!!!!!!!!")
+	var SSvalue = document.getElementById("SouSuo").value;
+	//alert(SSvalue);
+	location.href="<%=path%>/User/QueryByAConditions?str="+SSvalue;
+}
 </script>
 
 <body data-type="generalComponents">
@@ -79,8 +103,7 @@ function Really(id)
 						<li class="tpl-dropdown-content-external">
 							<h3>
 								你有 <span class="tpl-color-success">5</span> 条提醒
-							</h3>
-							<a href="###">全部</a>
+							</h3> <a href="###">全部</a>
 						</li>
 						<li class="tpl-dropdown-list-bdbc"><a href="#"
 							class="tpl-dropdown-list-fl"><span
@@ -106,8 +129,7 @@ function Really(id)
 						<li class="tpl-dropdown-content-external">
 							<h3>
 								你有 <span class="tpl-color-danger">9</span> 条新消息
-							</h3>
-							<a href="###">全部</a>
+							</h3> <a href="###">全部</a>
 						</li>
 						<li><a href="#" class="tpl-dropdown-content-message"> <span
 								class="tpl-dropdown-content-photo"> <img
@@ -138,8 +160,7 @@ function Really(id)
 						<li class="tpl-dropdown-content-external">
 							<h3>
 								你有 <span class="tpl-color-primary">4</span> 个任务进度
-							</h3>
-							<a href="###">全部</a>
+							</h3> <a href="###">全部</a>
 						</li>
 						<li><a href="javascript:;"
 							class="tpl-dropdown-content-progress"> <span class="task">
@@ -263,8 +284,19 @@ function Really(id)
 							</a></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a
-						href="<%=path%>/HT/login.html"
+					<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-wpforms"></i> <span>用户管理</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+						<ul class="tpl-left-nav-sub-menu" style="display: block;">
+							<li><a href="<%=path%>/User/QueryAll?page=1"> <i
+									class="am-icon-angle-right"></i> <span>用户管理</span> <i
+									class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+							</a></li>
+						</ul></li>
+
+					<li class="tpl-left-nav-item"><a href="<%=path%>/HT/login.jsp"
 						class="nav-link tpl-left-nav-link-list"> <i
 							class="am-icon-key"></i> <span>登录</span>
 
@@ -305,32 +337,32 @@ function Really(id)
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
 									<a type="button" href="<%=path%>/User/AddUserBefor"
-										class="am-btn am-btn-default am-btn-success">
-										<span class="am-icon-plus"  ></span> 新增
+										class="am-btn am-btn-default am-btn-success"> <span
+										class="am-icon-plus"></span> 新增
 									</a>
 								</div>
 							</div>
 						</div>
 						<div class="am-u-sm-12 am-u-md-3">
 							<div class="am-form-group">
-								<select data-am-selected="{btnSize: 'sm'}">
-									<option value="option1">所有类别</option>
-									<option value="option2">IT业界</option>
-									<option value="option3">数码产品</option>
-									<option value="option3">笔记本电脑</option>
-									<option value="option3">平板电脑</option>
-									<option value="option3">只能手机</option>
-									<option value="option3">超极本</option>
+								<select data-am-selected="{btnSize: 'sm'}" onchange="Select()"
+									name="sel" id="sel">
+									<option value="#">请选择人员身份</option>
+									<option value="<%=path%>/User/SelectRole?roleId=1">超级管理员</option>
+									<option value="<%=path%>/User/SelectRole?roleId=2">项目管理员</option>
+									<option value="<%=path%>/User/SelectRole?roleId=3">楼栋管理员</option>
+									<option value="<%=path%>/User/SelectRole?roleId=4">销售负责人</option>
+									<option value="<%=path%>/User/SelectRole?roleId=5">业务员</option>
 								</select>
 							</div>
 						</div>
 						<div class="am-u-sm-12 am-u-md-3">
 							<div class="am-input-group am-input-group-sm">
-								<input type="text" class="am-form-field"> <span
+								<input type="text" class="am-form-field" name="SouSuo" id="SouSuo"> <span
 									class="am-input-group-btn">
-									<button
+									<button onclick="SouSuo()" 
 										class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
-										type="button"></button>
+										type="button">搜索</button>
 								</span>
 							</div>
 						</div>
@@ -369,11 +401,10 @@ function Really(id)
 												<td>
 													<div class="am-btn-toolbar">
 														<div class="am-btn-group am-btn-group-xs">
-															<a	href="<%=path%>/User/QueryById?Id=${user.id}"
+															<a href="<%=path%>/User/QueryById?Id=${user.id}"
 																class="am-btn am-btn-default am-btn-xs am-text-secondary">
 																<span class="am-icon-pencil-square-o"></span> 编辑
-															</a>
-														<a onclick="Really(${user.id})"
+															</a> <a onclick="Really(${user.id})"
 																class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
 																<span class="am-icon-trash-o"></span> 删除
 															</a>
@@ -388,11 +419,12 @@ function Really(id)
 
 									<div class="am-fr">
 										<ul class="am-pagination tpl-pagination">
-										<li><a href="<%=path%>/User/QueryAll?page=${page-1}">«</a></li>
-											<c:forEach begin="1" end="${totals}" var="v">										
-											<li class="am-active"><a href="<%=path%>/User/QueryAll?page=${v}">${v}</a></li>
+											<li><a onclick="judgePage(${page-1},${totals})">«</a></li>
+											<c:forEach begin="1" end="${totals}" var="v">
+												<li class="am-active"><a
+													href="<%=path%>/User/QueryAll?page=${v}">${v}</a></li>
 											</c:forEach>
-										<li><a href="<%=path%>/User/QueryAll?page=${page+1}">»</a></li>
+											<li><a onclick="judgePage(${page+1},${totals})">»</a></li>
 										</ul>
 									</div>
 								</div>

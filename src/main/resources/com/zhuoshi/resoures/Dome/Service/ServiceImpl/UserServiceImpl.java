@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.QueryAllCount();
 	}
 
+	public List<User> ManyConditionsQuery(User user) {
+		// TODO Auto-generated method stub
+		return userDao.ManyConditionsQuery(user);
+	}
+
 }

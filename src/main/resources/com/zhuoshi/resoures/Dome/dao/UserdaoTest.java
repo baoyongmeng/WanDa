@@ -33,15 +33,13 @@ public class UserdaoTest {
 	@Test
 	public void testSelectById() {
 		
-		User user = new User();
-		 
-		user.setUserAccount("cxcx");
-		user.setUserPassword("123");
-		user.setUserMobile("112345678");
-		user.setUserName("qwedqwe");
-		user.setRoleId(5);
-		user.setCreateTime(new DateTime().getTime());
+		User user =new User();
 		
-	userDao.AddUser(user);
+		user.setRoleId(1);
+		
+		List<User> list = userDao.ManyConditionsQuery(user);
+			for (User user2 : list) {
+				System.err.println(user2);
+			}
 	}
 }

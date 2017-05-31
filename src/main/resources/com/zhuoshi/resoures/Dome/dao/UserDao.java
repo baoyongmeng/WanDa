@@ -38,4 +38,8 @@ public interface UserDao {
 	
 	//查询共计多少数据
 	public int QueryAllCount();
+	
+	//多条件查询
+	public List<User> ManyConditionsQuery(User user);	
+	
 }

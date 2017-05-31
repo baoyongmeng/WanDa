@@ -2,6 +2,8 @@ package zhuoshi.resoures.Dome.Service.ServiceImpl;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +95,16 @@ public class UserServiceImplTest {
 	@Test
 	public void testQueryByAccount() {
 		System.err.println(userService.QueryByAccount("admin"));
+		
+	}
+
+	@Test
+	public void ManyConditionsQuery() {
+		user.setUserMobile("13848501443");
+		 List<User> users = userService.ManyConditionsQuery(user);
+		 for (User user : users) {
+			System.err.println(user);
+		}
 		
 	}
 }

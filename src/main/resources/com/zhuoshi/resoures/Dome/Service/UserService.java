@@ -39,4 +39,7 @@ public interface UserService {
 	
 	//查询全部的总数
 	public int QueryAllCount(); 	
+	
+	//多条件查询
+	public List<User> ManyConditionsQuery(User user) ;
 }
